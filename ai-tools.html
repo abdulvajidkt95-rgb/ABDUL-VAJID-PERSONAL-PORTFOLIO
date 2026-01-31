@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools | Abdul Vajid K</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ai-styles.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="ai-dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar glass">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">VAJID<span>.AI</span></a>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-tab="chat">
+                    <i class="fas fa-robot"></i> <span>Chat Assistant</span>
+                </button>
+                <button class="nav-btn" data-tab="image">
+                    <i class="fas fa-image"></i> <span>Image Gen</span>
+                </button>
+                <button class="nav-btn" data-tab="analysis">
+                    <i class="fas fa-file-waveform"></i> <span>Analyze</span>
+                </button>
+                <button class="nav-btn" data-tab="about">
+                    <i class="fas fa-info-circle"></i> <span>About AI</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Chat Section -->
+            <section id="chat" class="ai-section active">
+                <div class="section-header">
+                    <h2>vaji's AI</h2>
+                    <p>Powered by advanced LLM algorithms. Ask me anything about Vajid.</p>
+                </div>
+                <div class="chat-container glass">
+                    <div class="chat-history" id="chat-history">
+                        <div class="message bot">
+                            <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                            <div class="message-content">Hello! I'm vaji's AI. Ask me about his projects,
+                                skills, or contact info.</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Ask a question...">
+                        <button id="send-btn" class="btn-icon"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image Gen Section -->
+            <section id="image" class="ai-section">
+                <div class="section-header">
+                    <h2>Image Generator</h2>
+                    <p>Create stunning visuals with prompt engineering.</p>
+                </div>
+                <div class="image-gen-container">
+                    <div class="prompt-builder glass">
+                        <div class="form-group">
+                            <label>Prompt</label>
+                            <textarea id="image-prompt"
+                                placeholder="Describe the image you want to generate..."></textarea>
+                        </div>
+                        <div class="prompt-tools">
+                            <button class="btn btn-outline btn-sm" id="enhance-prompt-btn"><i
+                                    class="fas fa-wand-magic-sparkles"></i> Enhance Prompt</button>
+                            <button class="btn btn-primary" id="generate-image-btn">Generate</button>
+                        </div>
+                    </div>
+                    <div class="image-preview glass" id="image-result">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image"></i>
+                            <p>Generated image will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis Section -->
+            <section id="analysis" class="ai-section">
+                <div class="section-header">
+                    <h2>File Analysis</h2>
+                    <p>Upload documents or images for deep analysis.</p>
+                </div>
+                <div class="upload-zone glass" id="drop-zone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop files here</h3>
+                    <p>or click to browse (PDF, JPG, PNG)</p>
+                    <input type="file" id="file-upload" hidden>
+                </div>
+                <div class="analysis-results glass" id="analysis-results" style="display: none;">
+                    <h3>Analysis Report</h3>
+                    <div class="loader" id="analysis-loader"></div>
+                    <p id="analysis-text"></p>
+                </div>
+            </section>
+
+            <!-- About AI Section -->
+            <section id="about" class="ai-section">
+                <div class="section-header">
+                    <h2>About This AI</h2>
+                    <p>The technology behind the dashboard.</p>
+                </div>
+                <div class="glass" style="padding: 2rem; max-width: 800px;">
+                    <h3><i class="fas fa-brain" style="color: var(--primary);"></i> Neural Architecture</h3>
+                    <p style="margin-bottom: 1rem; color: var(--text-muted);">This dashboard mimics a state-of-the-art
+                        Multi-Modal AI system. It is designed to demonstrate frontend capabilities in building complex,
+                        data-driven interfaces.</p>
+
+                    <h3><i class="fas fa-shield-halved" style="color: var(--secondary);"></i> Secure & Private</h3>
+                    <p style="margin-bottom: 1rem; color: var(--text-muted);">All logic runs locally in your browser. No
+                        data is actually sent to external servers in this demo environment, ensuring complete privacy
+                        during the showcase.</p>
+
+                    <h3><i class="fas fa-code" style="color: var(--accent);"></i> Tech Stack</h3>
+                    <ul style="list-style: disc; margin-left: 1.5rem; color: var(--text-muted);">
+                        <li>HTML5 & CSS3 (Glassmorphism)</li>
+                        <li>Vanilla JavaScript (ES6+)</li>
+                        <li>Smooth Animations & Transitions</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="ai-script.js"></script>
+</body>
+
+</html>
