@@ -43,26 +43,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Knowledge Base ---
     const knowledgeBase = {
         identity: [
-            { keywords: ['who are you', 'about me', 'who is abdul', 'owner', 'creator'], response: "I am an AI assistant representing Abdul Vajid K, a passionate Learning Software Developer and Ethical Hacker. You can verify his work or follow him on Instagram @vaji__zz." },
+            { keywords: ['who are you', 'your name', 'identify'], response: ["I am Vajid's AI assistant, here to provide information about his work and skills!", "I'm Vaji-AI, the digital representative of Abdul Vajid K. Nice to meet you!"] },
+            { keywords: ['who is abdul', 'who is vajid', 'about him', 'owner', 'creator'], response: ["Abdul Vajid K is a passionate Software Developer and Ethical Hacker focused on building secure digital solutions.", "Vajid is the mastermind behind this portfolio! He's a developer and ethical hacker based in Kerala."] },
             { keywords: ['contact', 'email', 'phone', 'reach', 'message'], response: "You can reach Abdul directly via the contact form on this site, or drop an email to abdulvajidkt95@gmail.com. He is always open to interesting collaborations!" },
             { keywords: ['instagram', 'social', 'insta', 'link'], response: "Catch him on Instagram: @vaji__zz. He also has a GitHub profile at https://github.com/abdulvajidkt95-rgb." }
         ],
         projects: [
-            { keywords: ['project', 'work', 'portfolio', 'built', 'make'], response: "Abdul has built several impressive projects, including a secure E-Commerce Platform, a Python-based Vulnerability Scanner, and this very Portfolio! Check out the 'Projects' section for more details." },
+            { keywords: ['project', 'work', 'portfolio', 'built', 'make'], response: ["Abdul has built several impressive projects, including a secure E-Commerce Platform, a Python-based Vulnerability Scanner, and this very Portfolio!", "You can find his best work in the 'Projects' section, ranging from Full-stack apps to security tools."] },
             { keywords: ['ecommerce', 'shop', 'store'], response: "The E-Commerce Platform is a full-stack solution featuring secure payment gateways, user authentication, and a dynamic admin dashboard." },
             { keywords: ['scanner', 'vuln', 'security tool'], response: "His VulnScanner is a Python tool designed to identify common security loopholes in local networks. It's a testament to his ethical hacking expertise." }
         ],
         skills: [
-            { keywords: ['skill', 'stack', 'tech', 'language', 'program'], response: "Abdul specializes in a powerful stack: JavaScript (React, Node.js), Python, HTML/CSS for development, and tools like Burp Suite, Metasploit, and Kali Linux for security." },
+            { keywords: ['skill', 'stack', 'tech', 'language', 'program'], response: ["Abdul specializes in a powerful stack: JavaScript (React, Node.js), Python, HTML/CSS, and various security tools like Burp Suite.", "He's proficient in Full-Stack development and Cybersecurity, using tools like React, Python, and Kali Linux."] },
             { keywords: ['python'], response: "Python is one of his core strengths, used primarily for backend development, automation scripts, and cybersecurity tools." },
             { keywords: ['react', 'frontend', 'ui'], response: "He crafts responsive, high-performance user interfaces using React.js, often enhanced with modern design principles like Glassmorphism." }
         ],
         services: [
-            { keywords: ['service', 'offer', 'hire', 'do for me'], response: "Abdul offers professional services in Web Development (Full Stack), Security Audits (Penetration Testing), and Custom Software Solutions." },
+            { keywords: ['service', 'offer', 'hire', 'do for me'], response: ["Abdul offers professional services in Web Development (Full Stack), Security Audits (Penetration Testing), and Custom Software Solutions.", "He can help with web development projects or security assessments. Check out the 'Services' tab!"] },
             { keywords: ['hack', 'hack me'], response: "As an Ethical Hacker, Abdul performs security audits to *protect* systems. He does not engage in malicious activities. Safety first!" }
         ],
         general: [
-            { keywords: ['hello', 'hi', 'hey', 'greetings'], response: ["Hello! Ready to explore the digital world of Abdul Vajid?", "Hi there! How can I assist you today?", "Greetings! Ask me anything about code or security."] },
+            { keywords: ['hello', 'hi', 'hey', 'greetings'], response: ["Hello! Ready to explore the digital world of Abdul Vajid?", "Hi there! I am personal assistant of Vajid. Are you a relative of Vajid? Ask me about @vaji__zz. He was a brave boy who made me. I LOVE HIM. Do you love him?", "Greetings! Ask me anything about code or security."] },
+            { keywords: ['yes'], response: "Yes! Thank you for loving him. He is my owner, so if you like him, I like you too! How can I help you?" },
+            { keywords: ['no'], response: "No? Well, to each their own, but Vajid is a visionary! I'll stick with my owner. How can I assist you otherwise?" },
             { keywords: ['how are you', 'status'], response: "I'm running at peak performance! All systems nominal. How about you?" },
             { keywords: ['joke', 'funny'], response: ["Why do programmers prefer dark mode? Because light attracts bugs!", "Knock knock. Who's there? ... *long pause* ... Java.", "A SQL query walks into a bar, walks up to two tables and asks... 'Can I join you?'"] },
             { keywords: ['thank', 'thanks'], response: "You're welcome! Let me know if you need anything else." },
@@ -74,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "That's an interesting topic! While I focus on Abdul's professional work, I'd love to try and answer if you can relate it to tech.",
         "I'm tuned specifically for Web Development and Cybersecurity queries. Can you rephrase that?",
         "I might need an upgrade to answer that one! Try asking about my 'Projects' or 'Skills'.",
-        "My neural network is drawing a blank on that. Ask me about Abdul's stack!"
+        "i am personal assistent of vajid.are you relative of vajid. Ask me about vajizzz"
     ];
 
     function handleChat() {

@@ -318,14 +318,14 @@ body {
 @media (max-width: 768px) {
     .ai-dashboard {
         flex-direction: column;
-        height: auto;
-        min-height: 100vh;
+        height: 100vh;
+        overflow: hidden;
     }
 
     .sidebar {
         width: 100%;
         height: auto;
-        padding: 1rem;
+        padding: 0.8rem 1rem;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
@@ -337,17 +337,44 @@ body {
         margin-bottom: 0;
     }
 
-    .sidebar-nav span {
+    .sidebar-header .logo {
+        font-size: 1.2rem;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        gap: 0.5rem;
+        flex: initial;
+    }
+
+    .nav-btn {
+        padding: 0.5rem;
+    }
+
+    .nav-btn span {
         display: none;
     }
 
     .sidebar-footer {
-        display: none;
+        padding: 0;
+        border: none;
+        display: flex;
+        align-items: center;
     }
 
     .main-content {
-        padding: 1rem;
-        padding-top: 2rem;
+        padding: 1.5rem 1rem;
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .chat-container {
+        height: calc(100vh - 180px);
+        /* Adjust for header/nav */
     }
 
     .image-gen-container {
