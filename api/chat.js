@@ -35,8 +35,9 @@ export default async function handler(req, res) {
             reply: data.choices[0].message.content,
         });
     } catch (error) {
+        console.error("OpenAI API Error:", error);
         return res.status(500).json({
-            reply: "❌ AI error. Please try again later.",
+            reply: `❌ AI Error: ${error.message}. Please check your API key and connection.`
         });
     }
 }
