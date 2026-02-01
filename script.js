@@ -172,41 +172,12 @@ let isDragging = false;
 let startX, startY, initialX, initialY;
 let hasMoved = false;
 
-// Intelligence Data
-const knowledgeBase = {
-    identity: [
-        { keywords: ['who are you', 'about me', 'who is abdul', 'owner', 'creator'], response: "I am an AI assistant representing Abdul Vajid K, a passionate Learning Software Developer and Ethical Hacker. You can verify his work or follow him on Instagram @vaji__zz." },
-        { keywords: ['contact', 'email', 'phone', 'reach', 'message'], response: "You can reach Abdul directly via the contact form on this site, or drop an email to abdulvajidkt95@gmail.com. He is always open to interesting collaborations!" },
-        { keywords: ['instagram', 'social', 'insta', 'link'], response: "Catch him on Instagram: @vaji__zz. He also has a GitHub profile at https://github.com/abdulvajidkt95-rgb." }
-    ],
-    projects: [
-        { keywords: ['project', 'work', 'portfolio', 'built', 'make'], response: "Abdul has built several impressive projects, including a secure E-Commerce Platform, a Python-based Vulnerability Scanner, and this very Portfolio! Check out the 'Projects' section for more details." },
-        { keywords: ['ecommerce', 'shop', 'store'], response: "The E-Commerce Platform is a full-stack solution featuring secure payment gateways, user authentication, and a dynamic admin dashboard." },
-        { keywords: ['scanner', 'vuln', 'security tool'], response: "His VulnScanner is a Python tool designed to identify common security loopholes in local networks. It's a testament to his ethical hacking expertise." }
-    ],
-    skills: [
-        { keywords: ['skill', 'stack', 'tech', 'language', 'program'], response: "Abdul specializes in a powerful stack: JavaScript (React, Node.js), Python, HTML/CSS for development, and tools like Burp Suite, Metasploit, and Kali Linux for security." },
-        { keywords: ['python'], response: "Python is one of his core strengths, used primarily for backend development, automation scripts, and cybersecurity tools." },
-        { keywords: ['react', 'frontend', 'ui'], response: "He crafts responsive, high-performance user interfaces using React.js, often enhanced with modern design principles like Glassmorphism." }
-    ],
-    services: [
-        { keywords: ['service', 'offer', 'hire', 'do for me'], response: "Abdul offers professional services in Web Development (Full Stack), Security Audits (Penetration Testing), and Custom Software Solutions." },
-        { keywords: ['hack', 'hack me'], response: "As an Ethical Hacker, Abdul performs security audits to *protect* systems. He does not engage in malicious activities. Safety first!" }
-    ],
-    general: [
-        { keywords: ['hello', 'hi', 'hey', 'greetings'], response: ["Hello! Ready to explore the digital world of Abdul Vajid?", "Hi there! How can I assist you today?", "Greetings! Ask me anything about code or security."] },
-        { keywords: ['how are you', 'status'], response: "I'm running at peak performance! All systems nominal. How about you?" },
-        { keywords: ['joke', 'funny'], response: ["Why do programmers prefer dark mode? Because light attracts bugs!", "Knock knock. Who's there? ... *long pause* ... Java.", "A SQL query walks into a bar, walks up to two tables and asks... 'Can I join you?'"] },
-        { keywords: ['thank', 'thanks'], response: "You're welcome! Let me know if you need anything else." },
-        { keywords: ['bye', 'goodbye', 'exit'], response: "Goodbye! Stay secure and keep coding." }
-    ]
-};
-
+// Intelligence Data (Integrated with OpenAI API)
+// Intelligence Data (Integrated with OpenAI API)
 const fallbacks = [
-    "That's an interesting topic! While I focus on Abdul's professional work, I'd love to try and answer if you can relate it to tech.",
-    "I'm tuned specifically for Web Development and Cybersecurity queries. Can you rephrase that?",
-    "I might need an upgrade to answer that one! Try asking about my 'Projects' or 'Skills'.",
-    "My neural network is drawing a blank on that. Ask me about Abdul's stack!"
+    "I'm having trouble connecting right now. Please try again later!",
+    "My neural network is a bit foggy. Can you repeat that?",
+    "I'm specialized in Abdul's work—ask me about his projects or skills!"
 ];
 
 function addPopupMessage(htmlOrText, isUser = false, isHtml = false) {
@@ -224,11 +195,11 @@ function addPopupMessage(htmlOrText, isUser = false, isHtml = false) {
     chatBody.scrollTop = chatBody.scrollHeight;
 }
 
-function handlePopupChat() {
-    const text = popupInput.value.trim();
-    if (!text) return;
+async function handlePopupChat() {
+    const message = popupInput.value.trim();
+    if (!message) return;
 
-    addPopupMessage(text, true);
+    addPopupMessage(message, true);
     popupInput.value = '';
 
     // Bot Typing Simulation
@@ -238,51 +209,25 @@ function handlePopupChat() {
     chatBody.appendChild(loadingDiv);
     chatBody.scrollTop = chatBody.scrollHeight;
 
-    setTimeout(() => {
+    try {
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message })
+        });
+
         if (chatBody.contains(loadingDiv)) chatBody.removeChild(loadingDiv);
 
-        const lowerText = text.toLowerCase();
-        let response = null;
+        const data = await response.json();
+        addPopupMessage(data.reply, false);
 
-        // Image Generation Logic
-        const imageTriggers = ['generate image', 'create image', 'draw', 'show me a picture of'];
-        const trigger = imageTriggers.find(t => lowerText.includes(t));
+        // Auto-speak the AI response
+        speak(data.reply);
 
-        if (trigger) {
-            const prompt = lowerText.split(trigger)[1].trim();
-            if (prompt) {
-                const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=800&height=600&nologo=true`;
-                addPopupMessage("Generating your visual request...", false);
-                const imgHtml = `<img src="${imgUrl}" class="generated-img" style="width: 100%; border-radius: 8px; margin-top: 10px; display: block; border: 1px solid var(--glass-border);">`;
-                setTimeout(() => {
-                    addPopupMessage(imgHtml, false, true);
-                }, 1000);
-                return;
-            }
-        }
-
-        // Search Knowledge Base
-        for (const category in knowledgeBase) {
-            const topics = knowledgeBase[category];
-            for (const topic of topics) {
-                if (topic.keywords.some(k => lowerText.includes(k))) {
-                    if (Array.isArray(topic.response)) {
-                        response = topic.response[Math.floor(Math.random() * topic.response.length)];
-                    } else {
-                        response = topic.response;
-                    }
-                    break;
-                }
-            }
-            if (response) break;
-        }
-
-        if (!response) {
-            response = fallbacks[Math.floor(Math.random() * fallbacks.length)];
-        }
-
-        addPopupMessage(response, false);
-    }, 1000 + Math.random() * 1000);
+    } catch (error) {
+        if (chatBody.contains(loadingDiv)) chatBody.removeChild(loadingDiv);
+        addPopupMessage(fallbacks[Math.floor(Math.random() * fallbacks.length)], false);
+    }
 }
 
 function speak(text) {
